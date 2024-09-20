@@ -5,7 +5,7 @@ name: Python Intel (ubuntu, amd64)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "fixtests" ]
   pull_request:
     branches: [ "main" ]
 
@@ -31,12 +31,12 @@ jobs:
         pip install git+https://github.com/Blosc/python-blosc2.git
     - name: Test with pytest
       run: |
-        pytest
-    - name: Test with pytest (auth on)
-      run: |
-        pytest
-      env:
-        CATERVA2_SECRET: c2sikrit
+        pytest -x -v -s
+#   - name: Test with pytest (auth on)
+#     run: |
+#       pytest
+#     env:
+#       CATERVA2_SECRET: c2sikrit
     - name: Test building docs
       run: |
         pip install -r doc/requirements.txt

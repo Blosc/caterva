@@ -277,6 +277,7 @@ def follow(name: str):
 
         # Save metadata and create Proxy
         abspath = rootdir / relpath
+        print('XXX follow: init_b2', abspath, key, metadata)
         init_b2(abspath, key, metadata)
 
         # Save etag
@@ -459,6 +460,7 @@ async def post_subscribe(
             raise srv_utils.raise_unauthorized(f"Subscribing to {name} requires authentication")
     else:
         get_root(name)
+        print('XXX post_subscribe: follow', name)
         follow(name)
     return 'Ok'
 
@@ -1721,6 +1723,7 @@ def main():
     global urlbase
     urlbase = args.url
     root_path = str(furl.furl(urlbase).path)
+    print('XXX', root_path)
     utils.uvicorn_run(app, args, root_path=root_path)
 
 
